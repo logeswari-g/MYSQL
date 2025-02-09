@@ -1,0 +1,29 @@
+SQL Views
+Definition:
+A view is a virtual table that is based on the result of an SQL query. It does not store data itself but displays data stored in other tables.
+
+Advantages of Views:
+
+Simplifies complex queries.
+Provides data security by showing only specific columns/rows.
+Makes maintenance easier by abstracting underlying table structure.
+
+syntax:
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+Example:
+
+CREATE VIEW HighEarners AS
+SELECT EmployeeID, Name, Salary
+FROM Employees
+WHERE Salary > 50000;
+
+
+SELECT * FROM view_name;
+
+
+DROP VIEW view_name;

@@ -1,0 +1,50 @@
+What is Indexing in MySQL?
+Indexing in MySQL is a data structure technique used to optimize query performance by allowing the database to quickly locate and retrieve specific rows in a table without scanning the entire table.
+Indexes act as pointers to data in a table, much like an index in a book, which helps you find the page number of a topic instead of reading the whole book.
+
+Why Use Indexing?
+Improves Query Performance: Speeds up SELECT queries by reducing the amount of data MySQL needs to scan.
+Facilitates Sorting: Enhances ORDER BY and GROUP BY operations.
+Ensures Uniqueness: Helps enforce unique constraints in columns (e.g., PRIMARY KEY, UNIQUE indexes).
+Optimizes Joins: Improves the performance of table joins.
+
+
+Unique Index
+CREATE UNIQUE INDEX unique_index_name ON employees(email);
+
+Regular/Non-Unique Index
+CREATE INDEX index_name ON employees(name);
+
+Composite Index
+CREATE INDEX composite_index ON employees(department, salary);
+
+
+How to create Index
+
+CREATE TABLE employees (
+    id INT NOT NULL,
+    name VARCHAR(50),
+    email VARCHAR(100),
+    PRIMARY KEY (id),
+    UNIQUE (email),
+    INDEX (name)
+);
+
+
+CREATE INDEX index_name ON table_name(column_name);
+
+
+ALTER TABLE employees ADD INDEX index_name(column_name);
+
+
+SHOW INDEX FROM table_name;
+
+
+Detailed Comparison
+Aspect	Without Index	With Index
+Query Execution	Full Table Scan	Index Lookup and Row Fetch
+Time Complexity	O(n)	O(log n) + O(k)
+Disk I/O	High (reads the entire table)	Low (fetches only matching rows)
+CPU Usage	High (evaluates condition for all rows)	Low (evaluates fewer rows)
+Performance on Large Data	Poor	Excellent
+Applicable for Small Tables	Doesn't matter (full scan is fast)	Overhead of maintaining an index may not justify its use

@@ -1,0 +1,39 @@
+In MySQL, the order of execution for SQL queries, especially SELECT statements, is not always intuitive as it does not match the order in which the SQL is written. Here's the logical order of execution:
+
+1. FROM
+The data source (table or tables) is identified.
+Joins and any conditions specified in the ON clause are processed.
+2. WHERE
+Filters rows based on conditions. Only rows that satisfy the WHERE clause move to the next step.
+3. GROUP BY
+Groups the rows into summary rows based on the specified columns.
+4. HAVING
+Applies a filter to groups created in the GROUP BY step. Only groups that meet the HAVING condition are retained.
+5. SELECT
+Selects the columns or expressions to include in the final result.
+6. DISTINCT
+Removes duplicate rows from the result set.
+7. ORDER BY
+Sorts the result set based on one or more columns or expressions.
+8. LIMIT
+Limits the number of rows returned based on the specified value.
+
+Example:
+SELECT DISTINCT column1, COUNT(column2)
+FROM table_name
+WHERE column3 = 'value'
+GROUP BY column1
+HAVING COUNT(column2) > 5
+ORDER BY column1 ASC
+LIMIT 10;
+
+
+Execution Flow:
+FROM: Identify table_name as the source of data.
+WHERE: Filter rows where column3 = 'value'.
+GROUP BY: Group the filtered rows by column1.
+HAVING: Filter groups where COUNT(column2) > 5.
+SELECT: Retrieve distinct column1 and COUNT(column2) for each group.
+DISTINCT: Ensure rows are unique (if applicable).
+ORDER BY: Sort results by column1 in ascending order.
+LIMIT: Return only the first 10 rows.

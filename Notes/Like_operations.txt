@@ -1,0 +1,46 @@
+What is the SQL LIKE Operator?
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. It is commonly used with wildcard characters:
+
+% - Represents zero, one, or multiple characters.
+_ - Represents a single character.
+
+
+-- Step 1: Create a Table
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    department VARCHAR(50),
+    email VARCHAR(100)
+);
+
+-- Step 2: Insert Data into the Table
+INSERT INTO employees (name, department, email) VALUES
+('Alice Johnson', 'HR', 'alice.johnson@example.com'),
+('Bob Smith', 'Finance', 'bob.smith@example.com'),
+('Charlie Brown', 'IT', 'charlie.brown@example.com'),
+('Alice Cooper', 'IT', 'alice.cooper@example.com'),
+('David Miller', 'Finance', 'david.miller@example.com');
+
+
+SELECT * 
+FROM employees
+WHERE name LIKE 'A%';
+
+SELECT * 
+FROM employees
+WHERE name LIKE '%son';
+
+SELECT * 
+FROM employees
+WHERE name LIKE '%li%';
+
+SELECT * 
+FROM employees
+WHERE email LIKE '%._com';
+
+
+SELECT * 
+FROM employees
+WHERE name LIKE 'A_ice';
+
+

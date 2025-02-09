@@ -1,0 +1,93 @@
+Subqueries in SQL
+A subquery (or inner query) is a query nested inside another query (outer query). Subqueries are used to perform operations that require multiple steps or conditions that can't be handled by a single query.
+
+Key Points:
+Enclosed in parentheses ( ).
+Can return a single value, a list of values, or a table.
+Used in:
+WHERE clause
+FROM clause
+SELECT clause
+Subqueries are executed before the outer query.
+---------------------------------
+Table:
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    salary DECIMAL(10, 2),
+    department_id INT,
+    job_title VARCHAR(50)
+);
+
+INSERT INTO employees (employee_id, name, salary, department_id, job_title) VALUES
+(101, 'John Smith', 60000, 10, 'Manager'),
+(102, 'Alice Brown', 50000, 20, 'Developer'),
+(103, 'Bob Johnson', 70000, 10, 'Manager'),
+(104, 'Carol Davis', 40000, 30, 'Developer'),
+(105, 'Eve Walker', 45000, 20, 'Developer');
+
+CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    location_id INT
+);
+INSERT INTO departments (department_id, name, location_id) VALUES
+(10, 'Sales', 1),
+(20, 'IT', 2),
+(30, 'HR', 3);
+select * from departments;
+
+CREATE TABLE locations (
+    location_id INT PRIMARY KEY,
+    city VARCHAR(50)
+);
+INSERT INTO locations (location_id, city) VALUES
+(1, 'New York'),
+(2, 'London'),
+(3, 'Mumbai');
+
+select * from locations;
+
+select * from employees;
+
+
+
+Types of Subqueries
+1.Single-Row Subquery
+
+Returns only one row.
+Commonly used with operators like =, <, >, <=, >=.
+
+SELECT name
+FROM employees
+WHERE salary = (SELECT MAX(salary) FROM employees);
+
+
+
+2.Multi-Row Subquery
+
+Returns multiple rows.
+Requires operators like IN, ANY, or ALL.
+SELECT name
+FROM employees
+WHERE department_id IN (SELECT department_id FROM departments WHERE location = 'New York');
+
+3.Correlated Subquery
+
+References columns from the outer query.
+Executes once for each row in the outer query.
+SELECT e.name
+FROM employees e
+WHERE e.salary > (SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
+
+4.Nested Subqueries
+
+Subqueries inside other subqueries.
+SELECT name
+FROM employees
+WHERE department_id = (
+    SELECT department_id
+    FROM departments
+    WHERE location_id = (SELECT location_id FROM locations WHERE city = 'London')
+);
+

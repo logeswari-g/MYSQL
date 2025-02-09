@@ -1,0 +1,67 @@
+SQL Constraints
+Constraints in SQL are rules applied to table columns to enforce data integrity and consistency. They restrict the type of data that can be inserted into a table.
+
+Types of Constraints
+NOT NULL
+
+Ensures that a column cannot have a NULL value.
+Example:
+CREATE TABLE Employees (
+    ID INT NOT NULL,
+    Name VARCHAR(50) NOT NULL
+);
+
+UNIQUE
+
+Ensures all values in a column are distinct.
+Allows one NULL value in the column.
+
+CREATE TABLE Employees (
+    Email VARCHAR(100) UNIQUE
+);
+
+
+PRIMARY KEY
+
+Combines NOT NULL and UNIQUE.
+Ensures each row has a unique identifier.
+Only one primary key is allowed per table.
+
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50)
+);
+
+FOREIGN KEY
+
+Establishes a relationship between two tables.
+The column must match a primary key in another table.
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(ID)
+);
+
+CHECK
+
+Ensures that values in a column meet specific conditions.
+
+CREATE TABLE Employees (
+    Age INT CHECK (Age >= 18)
+);
+
+DEFAULT
+
+Assigns a default value to a column if no value is provided.
+
+CREATE TABLE Employees (
+    JoiningDate DATE DEFAULT GETDATE()
+);
+
+Key Points to Remember
+Primary Key vs. Unique Key: A table can have only one primary key but multiple unique keys.
+Foreign Key ensures referential integrity between tables.
+Constraints can be applied:
+At the column level: Inline with the column definition.
+At the table level: Defined separately after all columns.

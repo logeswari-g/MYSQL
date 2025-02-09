@@ -1,0 +1,99 @@
+MySQL: COMMIT, ROLLBACK, and SAVEPOINT 
+In MySQL, COMMIT, ROLLBACK, and SAVEPOINT are used for transaction control. These commands help you manage transactions and ensure data consistency. Let's go through each one in detail:
+
+1. COMMIT
+Purpose: The COMMIT command is used to permanently save all changes made during the current transaction.
+When to use: After executing one or more queries (such as INSERT, UPDATE, or DELETE), and you are confident you want to make those changes permanent, you issue a COMMIT.
+
+START TRANSACTION;
+
+UPDATE customers SET balance = balance - 100 WHERE customer_id = 1;
+UPDATE customers SET balance = balance + 100 WHERE customer_id = 2;
+
+COMMIT;
+
+Explanation: This transaction debits 100 from one customer and credits it to another. After performing the updates, COMMIT is issued to make those changes permanent.
+
+
+2. ROLLBACK
+Purpose: The ROLLBACK command is used to undo any changes made during the current transaction. It rolls back all changes made since the last START TRANSACTION or the last COMMIT.
+When to use: If an error occurs or if you want to cancel a set of changes made within a transaction.
+
+START TRANSACTION;
+
+UPDATE customers SET balance = balance - 100 WHERE customer_id = 1;
+UPDATE customers SET balance = balance + 100 WHERE customer_id = 2;
+
+-- Something goes wrong, and we want to undo the changes
+ROLLBACK;
+
+
+Explanation: After making updates, if you encounter an error (or for some reason you decide not to proceed), ROLLBACK undoes the transaction, and the changes are not saved.
+
+
+3. SAVEPOINT
+Purpose: A SAVEPOINT is a marker within a transaction that you can use to roll back to a specific point instead of rolling back the entire transaction.
+When to use: When you want to save partial progress in a transaction, so you can undo specific parts without rolling back the entire transaction
+
+START TRANSACTION;
+
+-- Save point after first update
+SAVEPOINT sp1;
+
+UPDATE customers SET balance = balance - 100 WHERE customer_id = 1;
+
+-- Save point after second update
+SAVEPOINT sp2;
+
+UPDATE customers SET balance = balance + 100 WHERE customer_id = 2;
+
+-- Rollback to the first savepoint (sp1)
+ROLLBACK TO sp1;
+
+-- Commit the transaction
+COMMIT;
+
+
+Explanation:
+The SAVEPOINT sp1 and SAVEPOINT sp2 mark two points in the transaction.
+After the second update, if something goes wrong, you can roll back to sp1 (before the second update was made) using ROLLBACK TO sp1, leaving the first update intact.
+After the rollback, you can then COMMIT the changes that remain.
+
+
+Using COMMIT, ROLLBACK, and SAVEPOINT in a Transaction
+
+START TRANSACTION;
+
+-- Step 1: Deduct from Customer A's account
+UPDATE customers SET balance = balance - 500 WHERE customer_id = 1;
+
+-- Step 2: Savepoint after first operation
+SAVEPOINT step1_complete;
+
+-- Step 3: Add to Customer B's account
+UPDATE customers SET balance = balance + 500 WHERE customer_id = 2;
+
+-- Simulate a failure before commit (e.g., check if Customer B is valid)
+-- Let's say Customer B doesn't exist, and we want to cancel the second update.
+
+-- Step 4: Rollback to the savepoint after step 1
+ROLLBACK TO step1_complete;
+
+-- Step 5: Final step, commit the successful transaction (Step 1)
+COMMIT;
+
+Explanation:
+START TRANSACTION begins the transaction.
+SAVEPOINT step1_complete is set after the first update, allowing us to roll back to this point if needed.
+If the second update fails (e.g., Customer B does not exist), we can ROLLBACK TO step1_complete to undo only the second update while keeping the first one intact.
+Finally, COMMIT makes the changes to Customer A permanent, as we want to save the successful transaction and discard the failure.
+
+
+
+Key Points to Remember:
+Transaction Management:
+
+A transaction begins with START TRANSACTION and ends with either COMMIT or ROLLBACK.
+COMMIT makes all changes in the transaction permanent.
+ROLLBACK undoes all changes since the last START TRANSACTION or COMMIT.
+SAVEPOINT allows you to mark specific points within a transaction and roll back to those points if necessary.

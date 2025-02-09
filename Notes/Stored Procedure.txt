@@ -1,0 +1,37 @@
+stored procedure:
+
+A stored procedure in MySQL is a set of SQL statements that you can save and reuse. Stored procedures allow you to execute complex logic (like loops, conditionals, and SQL queries) on the server side, improving efficiency and reusability. They are especially useful for repetitive tasks, encapsulating business logic, and managing complex transactions.
+
+DELIMITER //
+
+CREATE PROCEDURE procedure_name (parameters)
+BEGIN
+   -- SQL statements
+END //
+
+DELIMITER ;
+
+
+Example:
+
+DELIMITER $$  
+CREATE PROCEDURE GetEmployeeDetail()
+BEGIN
+    SELECT * FROM Employees;
+END $$ 
+DELIMITER ;
+
+CALL GetEmployeeDetail();
+
+With Parameter:
+
+DELIMITER $$  
+CREATE PROCEDURE GetEmployeeDetailfor(In empid int )
+BEGIN
+    SELECT * FROM Employees WHERE EmployeeID = empid;
+END $$ 
+DELIMITER ;
+
+CALL GetEmployeeDetailfor(5);
+
+DROP PROCEDURE IF EXISTS GetEmployeeDetailfor;

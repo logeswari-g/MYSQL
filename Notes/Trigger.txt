@@ -1,0 +1,69 @@
+What is a Trigger?
+A trigger in MySQL is a set of actions that are automatically executed or "triggered" by certain events (like INSERT, UPDATE, or DELETE) on a specified table. A trigger is bound to a specific table and event, so when that event occurs, the trigger is executed.
+
+Trigger Syntax
+
+CREATE TRIGGER trigger_name
+{BEFORE|AFTER} {INSERT|UPDATE|DELETE}
+ON table_name
+FOR EACH ROW
+trigger_body;
+
+
+Explanation:
+
+trigger_name: The name of the trigger.
+BEFORE|AFTER: Whether the trigger will run before or after the event (insert, update, delete).
+INSERT|UPDATE|DELETE: Specifies which operation will trigger the action.
+table_name: The table to which the trigger is attached.
+FOR EACH ROW: Indicates that the trigger will be executed once for each row affected by the operation.
+trigger_body: The actual SQL statements that will be executed when the trigger is fired.
+Types of Triggers
+BEFORE Trigger: Executes before the operation (INSERT, UPDATE, DELETE) occurs on the table.
+AFTER Trigger: Executes after the operation is completed on the table.
+
+
+Example query on mysql:
+
+In MySQL, when you're creating a trigger (or any stored procedure or function) that includes a block of code with multiple statements, you need to change the delimiter temporarily. This is because MySQL by default uses a semicolon (;) as a statement delimiter, and since your trigger or procedure will have multiple statements, it can cause a conflict.
+
+To solve this, you use DELIMITER to temporarily change the statement delimiter while defining the trigger. Here's an example to demonstrate how to use DELIMITER with triggers:
+
+Example of Trigger with Delimiters
+
+AFTER:
+
+-- Change delimiter to something else, like //
+DELIMITER //
+
+CREATE TRIGGER log_new_customer
+AFTER INSERT
+ON customers
+FOR EACH ROW
+BEGIN
+   INSERT INTO audit_log (action, table_name, record_id, created_at)
+   VALUES ('INSERT', 'customers', NEW.customer_id, NOW());
+END//
+
+-- Reset delimiter back to semicolon
+DELIMITER ;
+
+
+BEFOE:
+
+-- Change delimiter to something else, like //
+DELIMITER //
+
+CREATE TRIGGER before_customer_insert
+BEFORE INSERT
+ON customers
+FOR EACH ROW
+BEGIN
+   -- Example logic: Set a default value if customer_name is NULL
+   IF NEW.customer_name IS NULL THEN
+       SET NEW.customer_name = 'Default Name';
+   END IF;
+END//
+
+-- Reset delimiter back to semicolon
+DELIMITER ;

@@ -1,0 +1,48 @@
+ORDER BY
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category VARCHAR(50),
+    price DECIMAL(10, 2),
+    stock INT
+);
+
+
+INSERT INTO products (product_id, product_name, category, price, stock) VALUES
+(1, 'Laptop', 'Electronics', 800.00, 50),
+(2, 'Smartphone', 'Electronics', 500.00, 150),
+(3, 'Refrigerator', 'Appliances', 1200.00, 30),
+(4, 'Microwave', 'Appliances', 200.00, 100),
+(5, 'Air Conditioner', 'Appliances', 1500.00, 20),
+(6, 'Headphones', 'Electronics', 100.00, 300),
+(7, 'Smartwatch', 'Electronics', 250.00, 200),
+(8, 'Blender', 'Appliances', 80.00, 120),
+(9, 'Television', 'Electronics', 1000.00, 40),
+(10, 'Toaster', 'Appliances', 50.00, 150);
+
+
+SELECT product_name, price
+FROM products
+ORDER BY price ASC;
+
+SELECT product_name, stock
+FROM products
+ORDER BY stock DESC;
+
+SELECT product_name, category, price
+FROM products
+ORDER BY category ASC, price DESC;
+
+SELECT product_name, stock, price
+FROM products
+ORDER BY stock DESC, price ASC;
+
+Practice Questions
+1.List all products, ordered by price in descending order.
+2.List products in the 'Electronics' category, ordered by stock in ascending order.
+3.List the top 5 products with the highest price.
+4.List products in the 'Appliances' category, ordered by price (ascending) and stock (descending).
+5.List products ordered by their name alphabetically.
+6.Find the least expensive product and display its details.
+

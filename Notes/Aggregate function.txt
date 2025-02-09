@@ -1,0 +1,45 @@
+#######
+
+Aggregate Functions in MySQL
+Aggregate functions perform a calculation on a set of values and return a single value. 
+
+
+Common aggregate functions include:
+
+COUNT() - Returns the number of rows.
+SUM() - Returns the sum of a numeric column.
+AVG() - Returns the average value of a numeric column.
+MAX() - Returns the maximum value in a column.
+MIN() - Returns the minimum value in a column.
+GROUP BY - Groups rows sharing a property for aggregate functions.
+
+
+CREATE TABLE Sales (
+    SaleID INT AUTO_INCREMENT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10, 2),
+    Quantity INT,
+    SaleDate DATE
+);
+
+
+INSERT INTO Sales (ProductName, Category, Price, Quantity, SaleDate)
+VALUES 
+('Laptop', 'Electronics', 800.00, 5, '2025-01-01'),
+('Smartphone', 'Electronics', 600.00, 8, '2025-01-02'),
+('Tablet', 'Electronics', 300.00, 10, '2025-01-03'),
+('Chair', 'Furniture', 120.00, 15, '2025-01-04'),
+('Desk', 'Furniture', 200.00, 7, '2025-01-05');
+
+
+SELECT SUM(Price * Quantity) AS TotalRevenue FROM Sales;
+
+SELECT SUM(Quantity) AS TotalQuantity FROM Sales;
+
+SELECT AVG(Price) AS AveragePrice FROM Sales;
+
+SELECT MAX(Price) AS MaxPrice, MIN(Price) AS MinPrice FROM Sales;
+
+SELECT COUNT(ProductName) AS ProductCount FROM Sales;
+

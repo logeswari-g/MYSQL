@@ -1,0 +1,46 @@
+In MySQL, GRANT and REVOKE are used to control user privileges on databases, tables, or other objects. These commands manage who can access or modify the data in your database, giving you granular control over security.
+
+1. GRANT - Assigning Privileges
+The GRANT statement is used to assign privileges to a user on a database or a table. You can assign various levels of access (e.g., SELECT, INSERT, UPDATE, DELETE) to users, allowing them to perform certain actions on specified database objects.
+
+GRANT privilege_type ON database_name.object_name TO 'username'@'host' IDENTIFIED BY 'password';
+
+privilege_type: The privilege to assign (e.g., SELECT, INSERT, UPDATE, ALL PRIVILEGES, etc.).
+database_name.object_name: The database and table (or * for all databases/tables) the privilege applies to.
+'username'@'host': The MySQL username and host (e.g., 'john'@'localhost').
+IDENTIFIED BY 'password': Optionally sets the user’s password (only needed when creating a user).
+
+Example:
+
+grant select , insert on mathesh.*  to "myfriend";
+
+
+
+2. REVOKE - Revoking Privileges
+The REVOKE statement is used to remove privileges that were previously granted to a user. This can be done for specific privileges on a database or table, or for all privileges.
+
+REVOKE privilege_type ON database_name.object_name FROM 'username'@'host';
+
+privilege_type: The privilege to remove (e.g., SELECT, INSERT, ALL PRIVILEGES).
+database_name.object_name: The database or table to which the privilege applies.
+'username'@'host': The MySQL username and host.
+
+Example:
+
+revoke select , insert on mathesh.*  from "myfriend";
+
+
+Common Privileges
+Here are some of the common privileges you can grant or revoke:
+
+ALL PRIVILEGES: Grants full control over a database or table (read, write, delete, etc.).
+SELECT: Allows reading data from a table (using SELECT queries).
+INSERT: Allows inserting new rows into a table.
+UPDATE: Allows modifying existing rows in a table.
+DELETE: Allows removing rows from a table.
+CREATE: Allows creating new databases or tables.
+DROP: Allows deleting databases or tables.
+ALTER: Allows modifying a table’s structure.
+INDEX: Allows creating or dropping indexes.
+EXECUTE: Allows executing stored procedures or functions.
+SHOW DATABASES: Allows listing databases.

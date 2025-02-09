@@ -1,0 +1,50 @@
+SQL:
+SQL (Structured Query Language) is a standardized programming language used for managing and manipulating relational databases. It is widely used in various database systems such as MySQL, PostgreSQL, Oracle, SQL Server, and SQLite, among others. SQL allows users to perform a variety of tasks including querying data, updating records, creating and modifying database structures, and controlling access to data.
+
+1. DDL (Data Definition Language):
+DDL commands are used to define, modify, and manage schema objects such as tables, indexes, and views. These commands affect the structure of the database.
+
+Commands:
+CREATE: Creates new database objects like tables, indexes, views, etc.
+ALTER: Modifies existing database objects.
+DROP: Deletes database objects.
+TRUNCATE: Removes all rows from a table, resetting any auto-increment values.
+RENAME: Changes the name of a database object.
+
+
+2. DQL (Data Query Language):
+DQL commands are used to query the database and retrieve data. The primary command in DQL is SELECT.
+
+Command:
+SELECT: Retrieves data from one or more tables. It can include various clauses like WHERE, ORDER BY, GROUP BY, HAVING, etc., to filter, sort, and group the data.
+
+3. DML (Data Manipulation Language):
+DML commands are used to manipulate data within existing schema objects. These operations involve inserting, updating, and deleting data.
+
+Commands:
+INSERT: Adds new rows to a table.
+UPDATE: Modifies existing rows in a table.
+DELETE: Removes rows from a table.
+MERGE: Performs insert, update, or delete operations in a single statement based on a specified condition (supported in some SQL databases).
+
+4. DCL (Data Control Language):
+DCL commands are used to control access to data within the database. These commands manage permissions and access rights.
+
+Commands:
+GRANT: Gives specific privileges to users or roles.
+REVOKE: Removes specific privileges from users or roles.
+
+5. TCL (Transaction Control Language):
+TCL commands are used to manage transactions in the database, ensuring that operations are completed successfully and maintaining the integrity of the data.
+
+Commands:
+COMMIT: Saves all the changes made in the transaction to the database.
+ROLLBACK: Reverts all the changes made in the current transaction.
+SAVEPOINT: Sets a point within a transaction to which a transaction can be rolled back.
+SET TRANSACTION: Sets the characteristics for the current transaction, such as isolation level.
+Summary:
+DDL: Defines and modifies the structure of the database objects.
+DQL: Queries and retrieves data.
+DML: Manipulates data within the database.
+DCL: Manages access and permissions.
+TCL: Manages transactions to ensure data integrity.

@@ -1,0 +1,141 @@
+JOINS:
+
+Joins in MySQL are used to combine data from two or more tables based on a related column. They are essential for retrieving data that spans multiple tables in a relational database.
+
+INNER JOIN
+Definition: Returns records that have matching values in both tables.
+Syntax
+
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+
+LEFT JOIN (or LEFT OUTER JOIN)
+Definition: Returns all records from the left table, and the matched records from the right table. If no match is found, NULL is returned for right table columns.
+Syntax
+
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+
+
+RIGHT JOIN (or RIGHT OUTER JOIN)
+Definition: Returns all records from the right table, and the matched records from the left table. If no match is found, NULL is returned for left table columns.
+Syntax
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+
+FULL JOIN (or FULL OUTER JOIN)
+Definition: Returns all records when there is a match in either table. If no match is found, NULL is returned for unmatched columns.
+Note: MySQL does not support FULL JOIN natively. You can achieve it using a UNION.
+Syntax:
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column
+UNION
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+
+
+CROSS JOIN
+Definition: Returns the Cartesian product of the two tables, i.e., all possible combinations of rows from both tables.
+Syntax:
+
+SELECT columns
+FROM table1
+CROSS JOIN table2;
+
+SELF JOIN
+Definition: A join where a table is joined with itself.
+Syntax:
+SELECT a.column1, b.column2
+FROM table_name a, table_name b
+WHERE condition;
+
+Key Points
+Join Conditions: Ensure the ON condition is accurate to avoid incorrect results.
+Alias Usage: Use table aliases for better readability and easier query writing.
+Performance: Joins can be resource-intensive for large datasets. Use indexes to optimize them.
+NULL Handling: Be cautious when working with LEFT, RIGHT, and FULL joins since NULLs may appear.
+
+
+
+
+EXAMPLE TABLE:
+
+CREATE TABLE departments (
+    id INT PRIMARY KEY,
+    department_name VARCHAR(50) NOT NULL
+);
+INSERT INTO departments (id, department_name) VALUES
+(101, 'HR'),
+(102, 'IT'),
+(103, 'Finance');
+
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+INSERT INTO employees (id, name, department_id) VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', NULL);
+
+Inner Join:
+SELECT employees.name, departments.department_name
+FROM employees
+INNER JOIN departments
+ON employees.department_id = departments.id;
+
+Left Join:
+SELECT employees.name, departments.department_name
+FROM employees
+LEFT JOIN departments
+ON employees.department_id = departments.id;
+
+
+Right Join:
+SELECT employees.name, departments.department_name
+FROM employees
+RIGHT JOIN departments
+ON employees.department_id = departments.id;
+
+Full Join:
+SELECT employees.name, departments.department_name
+FROM employees
+LEFT JOIN departments
+ON employees.department_id = departments.id
+UNION
+SELECT employees.name, departments.department_name
+FROM employees
+RIGHT JOIN departments
+ON employees.department_id = departments.id;
+
+
+Cross join:
+SELECT employees.name AS Employee, departments.department_name AS Department
+FROM employees
+CROSS JOIN departments;
+
+
+
+
+
+
+
+
+
+
+
+
+

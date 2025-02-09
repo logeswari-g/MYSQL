@@ -1,0 +1,31 @@
+MySQL LIMIT Clause
+Definition
+The LIMIT clause is used to specify the maximum number of rows to return from a query. It's useful for:
+
+Reducing the result set.
+Pagination in applications.
+Performance optimization by retrieving only the required data.
+
+Syntax:
+
+SELECT column1, column2, ...
+FROM table_name
+LIMIT row_count OFFSET;
+
+ExAMPLE:
+SELECT * FROM Employees
+LIMIT 5;
+Retrieves the first 5 rows from the Employees table.
+
+
+SELECT * FROM Employees
+LIMIT 5 OFFSET 3;
+
+Skips the first 3 rows and retrieves the next 5 rows.
+
+
+You can also specify LIMIT and OFFSET in a single statement:
+
+SELECT * FROM Employees
+LIMIT 3, 5;
+
