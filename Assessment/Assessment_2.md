@@ -1,4 +1,4 @@
-########### Joins #############
+**Questions in JOINS**
 
 Consider below tables:
 
@@ -43,7 +43,7 @@ Consider below tables:
 
 10. Find students enrolled in multiple courses
 
-########## Aggregate Functions #############
+**Questions in AGGREGATE FUNCTIONS**
 
 Students Table:
 
@@ -82,7 +82,7 @@ Marks Table:
 
 6. Find students who scored more than 85 in any subject.
 
-######### Like ###########################
+**Questions in LIKE**
 
 7. Find students whose names start with 'A'.
 
