@@ -1,4 +1,4 @@
-######### Create Table ########
+**Create Table**
 
 1. Write a  MySQL query to create a simple table countries including columns country_id, country_name and region_id.
 
@@ -6,7 +6,7 @@
 
 3. Write a MySQL query to create the structure of a table dup_countries similar to countries.
 
-######## Insert Rows ###########
+**Insert Rows**
 
 1. Write a  MySQL query to insert a record with your own value into the table countries against each columns.
 
@@ -38,8 +38,7 @@ Here is the structure of the table "countries".
 
 5. Write a MySQL query to insert 3 rows by a single insert statement.
 
-
-####### CONSTRAINTS ###########
+**CONSTRAINTS**
 
 1. Write a MySQL query to create a table countries set a constraint NULL.
 
@@ -73,7 +72,7 @@ ISBN: Must be unique.
 
 5. What happens if you try to insert a duplicate value in a column with a UNIQUE constraint? Write a query to demonstrate.
 
-####### ALTERS ###########
+** ALTERS **
 
 1. Write a  SQL statement to rename the table countries to country_new.
 
@@ -87,7 +86,7 @@ ISBN: Must be unique.
 
 6. Write a SQL statement to change the name of the column state_province to state, keeping the data type and size same.
 
-####### UPDATE ##############
+**UPDATE**
 
 1. Write a  SQL statement to change the email column of employees table with 'not available' for all employees.
 
