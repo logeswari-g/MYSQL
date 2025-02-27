@@ -1,1 +1,1 @@
-The repository contains of syllabus, assessment and sample query files for the MYSQL training. 
+The repository contains of syllabus, assessment questions for all the topics and program files for the MYSQL training.
